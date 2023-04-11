@@ -16,7 +16,7 @@ export async function textToSpeech(text: string) {
     "Content-Type": "application/json",
   };
   const data = {
-    voice: "en-US-MichelleNeural",
+    voice: "en-GB-Standard-B",
     ssml: [`<speak><p>${text}</p></speak>`],
     title: text.substring(0, 36),
   };

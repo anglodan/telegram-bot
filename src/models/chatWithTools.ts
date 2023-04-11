@@ -6,14 +6,15 @@ import { OpenAIApi } from "openai";
 import { googleTool } from "./tools/google";
 
 const openAIApiKey = process.env.OPENAI_API_KEY!;
+const model = process.env.OPENAI_MODEL || "gpt-4";
 
 const params = {
   verbose: true,
   temperature: 1,
   openAIApiKey,
-  modelName: process.env.OPENAI_MODEL || "gpt-4",
+  modelName: model,
   maxConcurrency: 1,
-  maxTokens: 4000,
+  maxTokens: model === 'gpt-4' ? 4000 : 2000,
   maxRetries: 5,
 };
 

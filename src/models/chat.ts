@@ -12,6 +12,7 @@ import { Configuration } from "openai";
 import { OpenAIApi } from "openai";
 
 const openAIApiKey = process.env.OPENAI_API_KEY!;
+const model = process.env.OPENAI_MODEL || "gpt-4";
 
 const params = {
   verbose: true,
@@ -19,7 +20,7 @@ const params = {
   openAIApiKey,
   modelName: process.env.OPENAI_MODEL || "gpt-4",
   maxConcurrency: 1,
-  maxTokens: 1000,
+  maxTokens: model === 'gpt-4' ? 1000 : 500,
   maxRetries: 5,
 };
 

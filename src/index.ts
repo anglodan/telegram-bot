@@ -71,7 +71,11 @@ bot.on("message", async (ctx) => {
   const text = (ctx.message as any).text;
 
   if (!text) {
-    ctx.reply("Please send a text message.");
+    try {
+      ctx.reply("Please send a text message.");
+    } catch (e) {
+      console.log({ message: "Failed to reply" }); 
+    }
     return;
   }
 
@@ -97,13 +101,10 @@ bot.on("message", async (ctx) => {
   }
 });
 
-bot.launch().then(() => {
-  console.log("Bot launched");
-  healthcheck();
-});
+bot.launch();
 
-process.on("SIGTERM", () => {
-  bot.stop();
-});
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
 console.log("Bot started");
+healthcheck();
